@@ -1,0 +1,26 @@
+<%= form_for(@attribute, :html => {:class => "form-horizontal"}) do |f| %>
+  <% if @attribute.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@attribute.errors.count, "error") %> prohibited this attribute from being saved:</h2>
+
+      <ul>
+      <% @attribute.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+   <div class="control-group">
+     <%= f.label :name, { :class => "control-label" } %>
+    <div class="controls">
+      <%= f.text_field :name %>
+    </div>
+  </div>
+  
+  <div class="form-actions">
+     <%= f.submit "Guardar", :class => 'btn btn-primary' %> <%= link_to('Cancelar', attributes_path, { :class => "btn" }) %>
+  </div>
+</fieldset>
+<% end %>

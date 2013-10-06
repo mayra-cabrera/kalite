@@ -1,0 +1,27 @@
+<%= form_for(@system_type, :html => {:class => "form-horizontal"} ) do |f| %>
+  <% if @system_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@system_type.errors.count, "error") %> prohibited this system_type from being saved:</h2>
+
+      <ul>
+      <% @system_type.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<fieldset>
+  <div class="control-group">
+     <%= f.label :name, { :class => "control-label" } %>
+    <div class="controls">
+      <%= f.text_field :name %>
+    </div>
+  </div>
+  
+  <div class="form-actions">
+     <%= f.submit "Guardar", :class => 'btn btn-primary' %> <%= link_to('Cancelar', system_types_path, { :class => "btn" }) %>
+  </div>
+</fieldset>
+
+<% end %>

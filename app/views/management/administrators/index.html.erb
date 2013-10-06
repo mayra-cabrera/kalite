@@ -1,0 +1,44 @@
+<% content_for :title, "Catálogos" %> 
+<div class="page-header">
+  <h1>Catálogo de administradores</h1>
+</div>
+
+<div class="row">
+  <div class="span4">
+    <div class="control-group">
+      <%= form_tag( management_administrators_path, :method => "get") do %>
+        Administrador:   <%= text_field_tag :administrator_name,'' %>
+        <%= submit_tag "Buscar", { :class => "btn-primary" } %>
+      <% end %>
+    </div>
+  </div>
+  <div class="span4">
+    <div class="pull-right">
+      <%= link_to 'Nuevo administrador', new_management_administrator_path, {:class => "btn btn-primary"} %>
+    </div>
+  </div>
+</div>
+
+<table class="table table-striped table-bordered table-condensed">
+  <tr>
+    <th>#</th>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th colspan="3" style="text-align: center"></th>
+  </tr>
+
+<% @administrators.each do |administrator| %>
+  <tr>
+    <td><%= administrator.id %></td>
+    <td><%= administrator.first_name %></td>
+    <td><%= administrator.last_name %></td>
+    <td style="text-align: center"><%= link_to 'Ver', [:management, administrator] %></td>
+    <td style="text-align: center"><%= link_to 'Editar', edit_management_administrator_path(administrator) %></td>
+    <td style="text-align: center"><%= link_to 'Eliminar',[:management, administrator], confirm: '¿Está seguro de eliminar este administrador?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+<%= paginate @administrators %>
+
+<br />
+

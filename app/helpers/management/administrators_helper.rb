@@ -1,0 +1,2 @@
+module Management::AdministratorsHelper
+end

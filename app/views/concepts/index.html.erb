@@ -1,0 +1,50 @@
+<% content_for :title, "Catálogos" %> 
+<div class="page-header">
+  <h1>Catálogo de conceptos</h1>
+</div>
+
+<div class="row">
+  <div class="span4">
+    <div class="control-group">
+      <%= form_tag( concepts_path, :method => "get") do %>
+        Concepto:   <%= text_field_tag :description,'' %>
+        <%= submit_tag "Buscar", { :class => "btn-primary" } %>
+      <% end %>
+    </div>
+  </div>
+  <div class="span4">
+    <div class="pull-right">
+      <%= link_to 'Nuevo concepto', new_concept_path, {:class => "btn btn-primary"} %>
+    </div>
+  </div>
+</div>
+<div class="span9">
+  <%= render "concepts/diagram_menu" %>
+</div>
+<div class="span9">
+ <table class="table table-striped table-bordered table-condensed">
+    <thead>
+      <th>#</th>
+      <th>Atributo</th>
+      <th>Descripción</th>
+      <th colspan="3" style="text-align: center"></th> 
+    </thead>
+    <tbody>
+      <% @concepts.each do |concept| %>
+      <tr>
+        <td style="display: none"><%= concept.diagram_id%></td>
+        <td><%= concept.id  %> </td>
+        <td><%= concept.attribute.name  %> </td>
+        <td><%= concept.description  %> </td>
+        <td style="text-align: center"><%= link_to 'Ver', concept %></td>
+        <td style="text-align: center"><%= link_to 'Editar', edit_concept_path(concept) %></td>
+        <td style="text-align: center"><%= link_to 'Eliminar', concept, confirm: '¿Está seguro de eliminar este concepto?', method: :delete %></td>
+      </tr>
+      <% end %>
+    </tbody>
+    
+  </table>
+  <%= paginate @concepts %>
+  
+</div>
+

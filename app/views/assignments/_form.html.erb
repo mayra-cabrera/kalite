@@ -1,0 +1,107 @@
+<%= form_for(@assignment, :html => {:class => "form-horizontal", :onSubmit => "return validateAll()"}) do |f|  %>
+  <% if @assignment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@assignment.errors.count, "error") %> prohibieron que se guardara saved:</h2>
+
+      <ul>
+      <% @assignment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+  <div class="span3">
+    <table class="table table-striped table-bordered table-condensed">
+      <thead>
+      <th>Atributo</th>
+      <th>Peso</th>
+      </thead>
+      <tbody>
+        <% @all_assignments.each do |assignment| %>
+        <tr>
+          <td><%= assignment.attribute.name %> </td>
+          <td><%= text_field_tag "d_" + assignment.attribute.id.to_s,assignment.weight, :class => "input-mini"  %> </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    
+  </div>
+  <div class="span4 well">
+    <ul class="nav nav-list">
+      <li class="nav-header">INFORMACIÓN</li>
+      <li><label id="la"><%= @assignment.system_type.name %></label></li>
+      <li><%= @assignment.diagram.name%></li>
+      <li class="nav-header">RECUERDE QUE: </li>
+      <li>Todos los atributos deben tener asignado un peso</li>
+      <li>La sumatoria de pesos debe ser igual a 1</li>
+    </ul>
+  </div>
+  
+</div>
+<div class="form-actions">
+   <%= f.submit "Guardar", :class => 'btn btn-primary' %> <%= link_to('Cancelar', assignments_path, { :class => "btn" }) %>
+</div>
+  
+<% end %>
+
+<script>
+  var attributes = []
+  <% @all_assignments.each  do | assignment| %>
+      x= <%= assignment.attribute.id.to_s %>;
+
+      if (attributes.indexOf(x.toString())){
+        attributes.push(x.toString());
+      }
+ 
+  <% end %>
+    
+  function validateAttributes(){
+    for(var i = 1; i <= attributes.length; i++){
+      if(document.getElementById("d_" + i).value == ""){
+        return false;
+      }     
+    }
+    return true;
+  }
+  
+  function validateWeigth(){
+    var weight;
+    weight = 0
+    for(var i = 1; i <= attributes.length; i++){
+      tmp =  parseFloat(document.getElementById("d_" + i).value)
+      weight = weight + tmp;
+           
+    }
+    if(weight == 1 || weight > .99998){
+      return true
+    }else{
+      return false
+    }  
+  }
+    
+  function validateAll(){
+    div = $("#la").parents("div.span4");
+    div.removeClass("error");
+    $('span.help-inline').remove();
+    if(validateAttributes()){
+      if(validateWeigth()){
+        return true
+      }else{
+        addMessageError("La suma de los pesos debe ser igual a uno");
+      }
+      
+    }else{
+      addMessageError("Debe especificar un peso por cada atributo");
+    }
+    return false;
+  }
+  
+  function addMessageError(inline){
+    div = $("#la").parents("div.span4");
+    span = "<span class='help-inline'><font color='red'>" + inline  + "</font></span>";
+    div.after(span);
+  }
+</script>

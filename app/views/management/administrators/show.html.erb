@@ -1,0 +1,37 @@
+<% content_for :title, "Catálogos" %> 
+
+<div class="row-fluid">
+  <div class="page-header">
+     <h1><%= @administrator.first_name %></h1>
+  </div>
+
+  <p>
+    <b>Nombre:</b>
+    <%= @administrator.first_name %>
+  </p>
+  
+  <p>
+    <b>Apellidos:</b>
+    <%= @administrator.last_name %>
+  </p>
+  
+  <p>
+    <b>Email:</b>
+    <%= @administrator.email %>
+  </p>
+
+  <p>
+    <b>Creación:</b>
+    <%= l @administrator.created_at, :format => :date_time %>
+  </p>
+
+  <p>
+    <b>Última actualización:</b>
+    <%= l @administrator.updated_at, :format => :date_time %>
+  </p>	
+
+  <div class="form-actions">
+    <%= link_to 'Editar',edit_management_administrator_path(@administrator), { :class => "btn btn-primary" } %> 
+  </div>
+</div>
+

@@ -1,0 +1,21 @@
+ <ul class="nav nav-tabs">
+   <%  if params[:id] %>
+    <li>
+   <% else %>
+    <li class="active">
+   <% end %>
+   <%=  link_to 'Todos', {:controller => :concepts, :action => :index}%> </li>
+    
+   <% @diagrams.each do |diagram| %>
+      <% if @active != "" %>
+        <%if @active == diagram.id %>
+           <li class="active">
+        <% else %>
+           <li>
+        <% end %>
+           <%=  link_to diagram.name, {:controller => :concepts, :action => :index, :id => diagram.id}%> </li>
+      <% else %>
+           <li><%=  link_to diagram.name, {:controller => :concepts, :action => :index, :id => diagram.id}%> </li>
+      <% end %>
+   <% end %>
+  </ul>

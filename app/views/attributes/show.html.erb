@@ -1,0 +1,27 @@
+<% content_for :title, "Catálogos" %>  
+
+
+<div class="row-fluid">
+  <div class="page-header">
+     <h1><%= @attribute.name %></h1>
+  </div>
+
+  <p>
+    <b>Nombre:</b>
+    <%= @attribute.name %>
+  </p>
+
+  <p>
+    <b>Creación:</b>
+    <%= l @attribute.created_at, :format => :date_time %>
+  </p>
+
+  <p>
+    <b>Última actualización:</b>
+    <%= l @attribute.updated_at, :format => :date_time %>
+  </p>	
+
+  <div class="form-actions">
+    <%= link_to 'Editar', edit_attribute_path(@attribute), { :class => "btn btn-primary" } %> 
+  </div>
+</div>

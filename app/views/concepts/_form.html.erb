@@ -1,0 +1,71 @@
+<%= form_for(@concept, :html => {:class => "form-horizontal"}) do |f| %>
+  <% if @concept.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@concept.errors.count, "error") %> prohibited this concept from being saved:</h2>
+
+      <ul>
+      <% @concept.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<fieldset>
+  <div class="control-group">
+     <%= f.label :description,  { :class => "control-label" } %>
+    <div class="controls">
+      <%= f.text_area :description, :cols => "20", :rows => "5" %>
+    </div>
+  </div>
+  
+  <div class="control-group">
+     <%= f.label :attribute_id, { :class => "control-label" } %>
+    <div class="controls">
+      <%= 
+          attributes = Attribute.order(:name).all.map{ |u| [u.name, u.id] }
+          f.select(:attribute_id, attributes, { :include_blank => true })
+       %>
+    </div>
+  </div>
+  
+  <div class="control-group">
+     <%= f.label :diagram_id, { :class => "control-label" } %>
+    <div class="controls">
+      <%= 
+          diagrams = Diagram.order(:name).all.map{ |u| [u.name, u.id] }
+          f.select(:diagram_id, diagrams, { :include_blank => true}, { :onchange => "selectSections()" })
+       %>
+    </div>
+  </div>
+  
+  <div class="control-group">
+     <%= f.label :section_id, { :class => "control-label" } %>
+    <div class="controls">
+      <%= 
+          sections = []
+          f.select(:section_id, sections, {  :include_blank => true })
+       %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+     <%= f.submit "Guardar", :class => 'btn btn-primary' %> <%= link_to('Cancelar', concepts_path, { :class => "btn" }) %>
+  </div>
+</fieldset>
+
+<% end %>
+
+<script>
+
+  function selectSections(){
+   document.getElementById("concept_section_id").options.length = 0;
+    diagram_id = document.getElementById("concept_diagram_id").value
+    sections_option = document.getElementById("concept_section_id")
+    <% @sections.each do |section| %>
+      if(<%= section.diagram_id %> == diagram_id ){
+        document.getElementById("concept_section_id").options[sections_option.length]=new Option("<%= section.name  %>", <%= section.id  %> , false, false)
+      }
+      
+    <% end %>
+  }
+</script>

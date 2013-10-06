@@ -1,0 +1,42 @@
+<% content_for :title, "Catálogos" %>  
+<div class="page-header">
+  <h1>Catálogo de subsistemas</h1>
+</div>
+
+<div class="row">
+  <div class="span4">
+    <div class="control-group">
+      <%= form_tag( subsystems_path, :method => "get") do %>
+        Subsistema:   <%= text_field_tag :subsystem_name,'' %>
+        <%= submit_tag "Buscar", { :class => "btn-primary" } %>
+      <% end %>
+    </div>
+  </div>
+  <div class="span4">
+    <div class="pull-right">
+      <%= link_to 'Nuevo subsistema', new_subsystem_path, {:class => "btn btn-primary"} %>
+    </div>
+  </div>
+</div>
+
+<table class="table table-striped table-bordered table-condensed">
+  <tr>
+    <th>#</th>
+    <th>Nombre</th>
+    <th>Pertenece a </th>
+    <th colspan="3" style="text-align: center"></th>
+  </tr>
+
+<% @subsystems.each do |subsystem| %>
+  <tr>
+    <td><%= subsystem.id %> </td>
+    <td><%= subsystem.name %> </td>
+    <td><%= subsystem.system.name %> </td>
+    <td style="text-align: center"><%= link_to 'Ver', subsystem %></td>
+    <td style="text-align: center"><%= link_to 'Editar', edit_subsystem_path(subsystem) %></td>
+    <td style="text-align: center"><%= link_to 'Eliminar', subsystem, confirm: '¿Está seguro de eliminar este subsistema?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+<%= paginate @subsystems %>
+<br />

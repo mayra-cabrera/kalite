@@ -1,0 +1,27 @@
+<% content_for :title, "Catálogos" %> 
+
+<div class="row-fluid">
+  <div class="page-header">
+          <h1><%= @system_type.name %></h1>
+  </div>
+
+  <p>
+    <b>Nombre:</b>
+    <%= @system_type.name %>
+  </p>
+
+  <p>
+    <b>Creación:</b>
+    <%= l  @system_type.created_at, :format => :date_time %>
+  </p>
+
+  <p>
+    <b>Última actualización:</b>
+    <%= l @system_type.updated_at, :format => :date_time %>
+  </p>	
+
+  <div class="form-actions">
+    <%= link_to 'Editar', edit_system_type_path(@system_type), { :class => "btn btn-primary" } %> 
+  </div>
+</div>
+

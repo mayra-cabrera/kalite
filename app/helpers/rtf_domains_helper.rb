@@ -1,0 +1,2 @@
+module RtfDomainsHelper
+end

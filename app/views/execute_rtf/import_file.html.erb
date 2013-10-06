@@ -1,0 +1,42 @@
+<% content_for :title, "Importar archivo" %> 
+
+<div class="page-header">
+  <h2><%= @rtf.subsystem.system.name %> </h2>
+  <h3><%= @rtf.subsystem.name %> </h3>
+  <%= link_to 'Atrás', programmer_home_show_formal_technical_reviews_path, { :class => "btn btn-small btn-primary" } %> 
+</div>
+
+<div class="row-fluid">
+  <div class="span4 well">
+    <p>
+      <h3><%= Diagram.find(@rtf.diagram_id).name %></h3>
+    </p>
+
+    <p>
+      <b>Administrador:</b>
+      <%= Administrator.find(@rtf.administrator_id).complete_name %>
+    </p>
+
+    <p>
+      <b>Programador:</b>
+      <%= Programmer.find(@rtf.programmer_id).complete_name %>
+    </p>
+  </div>
+  <div class="span7">
+    <div class="control-group">
+        <%= form_for( @attachment, :url => {:controller => 'execute_rtf', :action => 'create_file'}, :html => {:multipart => true}) do |f|%>
+          <%= hidden_field_tag 'rtf_id', @rtf.id %>
+          <label for="file">Seleccione el archivo que contiene el diagrama: </label> 
+          <%= f.file_field :attach, :onClick => "enableButton()" %><br/>
+          <%= submit_tag "Aceptar", :id => "submit", :class => "btn btn-primary", :disabled => true %>
+        <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById("submit").disabled = true;
+  function enableButton(){
+    document.getElementById("submit").disabled = false;
+  }
+</script>

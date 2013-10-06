@@ -1,0 +1,25 @@
+<% flash.each do |key, msg| %>
+  <div id="<%= key %>">
+    <% if key == :alert %>
+      <div class="alert alert-block">
+        <a class="close" href="#">×</a>
+        <p><strong>Alerta:</strong> <%= msg %></p>
+      </div>
+    <% elsif key == :error %>
+      <div class="alert alert-error">
+        <a class="close" href="#">×</a>
+        <p><strong>Error:</strong> <%= msg %></p>
+      </div>            
+    <% elsif key == :notice %>
+      <div class="alert alert-success">
+        <a class="close" href="#">×</a>
+        <p><strong>Aviso:</strong> <%= msg %></p>
+      </div>                  
+    <% else%>                  
+      <div class="alert alert-info">
+        <a class="close" href="#">×</a>
+        <p><strong>Aviso:</strong> <%= msg %></p>
+      </div>        
+    <% end %>
+  </div>
+<% end %>

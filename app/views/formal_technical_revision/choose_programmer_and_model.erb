@@ -1,0 +1,111 @@
+<% content_for :title, "Nueva Revisión Técnica Formal" %> 
+
+
+<div class="page-header">
+  <h2>Nueva revisión técnica formal</h2>
+  <h4>Programador y modelo</h4><br/>
+  <%= link_to 'Atrás', :back, { :class => "btn btn-small btn-primary" } %>
+</div>
+
+<div class="row">
+  
+  <div class="span5">
+    <form class="form-horizontal" name="addModelProgrammer" action="choose_attributes_per_model" onSubmit="return validateData()">
+      <%= hidden_field_tag "subsystem_id", @subsystem.id %>
+      
+      <strong>Seleccione al programador encargado de la revisión técnica formal:</strong><br/><br/>
+      <div class="control-group">
+        <label class="control-label">1) Programador: </label>
+        <div class="controls">
+            <%= collection_select(:programmer, :id, @programmers, :id, :first_name, {:include_blank => true}) %>
+        </div>
+      </div>
+      
+      <strong>Seleccione  el modelo a evaluar:</strong>
+      <div class="control-group">
+        <label class="control-label">2) Modelos: </label>
+        <div class="controls">
+            <% @diagrams. each do |diagram| %>
+              <label class="radio">
+                <input type="radio" name="diagram_id" id="<%=  diagram.id %>" value="<%= diagram.id %>"> <%= diagram.name  %>
+              </label>
+            <% end %>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Continuar</button>
+        <button class="btn">Cancelar</button>
+      </div>
+    </form>
+  </div>
+  
+  <div class="span5 well">
+    <h2><%=  @subsystem.name %> </h2>
+    <h4>Pertenece al sistema de <%= System.find(@subsystem.system_id).name    %> </h4><br/>
+    <h4>Tipo de sistema: <%= @subsystem.system.system_type.name  %> </h4>
+  </div>
+  
+</div>
+<script>
+  var programmers_id = [];
+  var diagram_ids = [];
+  <% @programmers.each  do | prog| %>
+      x= <%= prog.id.to_s %>;
+
+      if (programmers_id.indexOf(x.toString())){
+        programmers_id.push(x.toString());
+      }
+  <% end %>
+  
+  <% @diagrams.each  do | diagram| %>
+      x= <%= diagram.id.to_s %>;
+
+      if (diagram_ids.indexOf(x.toString())){
+        diagram_ids.push(x.toString());
+      }
+  <% end %>
+  function validateProgrammer() {
+    programmer = document.forms["addModelProgrammer"]["programmer_id"].value
+    if(programmer == ""){
+      return false;
+    }else{
+      return true;
+    }
+  }
+  
+  function validateRadioButton(){
+    for(var i = 0; i < diagram_ids.length; i++){
+      if(document.getElementById(diagram_ids[i]).checked){
+        return true;
+      }
+    }
+  }
+  
+  function validateData(){
+    var div = $("#programmer_id").parents("div.control-group");
+    $('span.help-inline', div).remove();
+    if (validateProgrammer() == false){
+      
+      div.removeClass("success");
+      div.addClass("error");
+      var span = "<span class='help-inline'>" + "Debe seleccionar un programador" + "</span>";
+      $("#programmer_id").after(span);
+       return false;
+    }else{
+      $('span.help-inline', div).remove();
+      div.removeClass("error");
+    }  
+    
+    if(validateRadioButton() == true){
+      $('span.help-inline', div).remove();
+      div.removeClass("error");
+      return true;
+    }else{
+      div = $("#1").parents("div.control-group")
+      div.addClass("error")
+      var span = "<span class='help-inline'><font color='red'>" + "Debe seleccionar al menos un modelo" + "</font></span>";
+      div.after(span)
+      return false;
+    }
+  }
+</script>

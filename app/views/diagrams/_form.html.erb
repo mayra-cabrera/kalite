@@ -1,0 +1,35 @@
+<%= form_for(@diagram, :html => {:class => "form-horizontal"} ) do |f| %>
+  <% if @diagram.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@diagram.errors.count, "error") %> prohibieron que este diagrama se guardará:</h2>
+
+      <ul>
+      <% @diagram.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<fieldset>
+  <div class="control-group">
+    <%= f.label :name, { :class => "control-label" } %>
+    <div class="controls">
+      <%= f.text_field :name %>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <%= f.label :folio, { :class => "control-label" } %>
+    <div class="controls">
+      <%= f.text_field :folio %>
+    </div>
+  </div>
+  
+  <div class="form-actions">
+     <%= f.submit "Guardar", :class => 'btn btn-primary' %> <%= link_to('Cancelar', diagrams_path, { :class => "btn" }) %>
+  </div>
+  
+</fieldset>
+
+<% end %>

@@ -1,0 +1,33 @@
+<% content_for :title, "Catálogos" %> 
+
+<div class="row-fluid">
+  <div class="page-header">
+          <h1><%= @subsystem.name %></h1>
+  </div>
+
+  <p>
+    <b>Descripción:</b>
+    <%= @subsystem.description %>
+  </p>
+
+ 
+   <p>
+    <b>Pertenece a sistema:</b>
+    <%= System.find(@subsystem.system_id).name%>
+  </p>
+  
+   <p>
+    <b>Creación:</b>
+    <%= l @subsystem.created_at, :format => :date_time %>
+  </p>
+
+  <p>
+    <b>Última actualización:</b>
+    <%= l @subsystem.updated_at, :format => :date_time %>
+  </p>	
+
+  <div class="form-actions">
+    <%= link_to 'Editar', edit_subsystem_path(@subsystem), { :class => "btn btn-primary" } %> 
+  </div>
+</div>
+

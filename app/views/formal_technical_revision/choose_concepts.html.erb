@@ -1,0 +1,118 @@
+<% content_for :title, "Nueva Revisión Técnica Formal" %> 
+
+<div class="page-header">
+  <h2>Nueva revisión técnica formal</h2>
+  <h4>Conceptos</h4><br/>
+  <%= link_to 'Atrás', :back, { :class => "btn btn-small btn-primary" } %>
+</div>
+
+<div class="row">
+  <strong>Seleccione a los conceptos deseados:</strong><br/><br/>
+  <div class="span7">
+    <form name="addConcepts" action="save_rtf" onSubmit="return validateData()">
+      <div style="OVERFLOW: auto; HEIGHT: 300px"> 
+        <%= hidden_field_tag "subsystem_id", @subsystem.id %>
+        <%= hidden_field_tag "programmer_id", @programmer.id %>
+        <%= hidden_field_tag "diagram_id", @diagram.id%>
+        <% @attributes.each do |attribute| %>
+          <%= hidden_field_tag "attributes[]",attribute %>
+        <% end %> 
+        <% @weights.each do |w| %>
+          <%= hidden_field_tag "weigths[]",w%>
+        <% end %>
+        <table class="table table-striped table-bordered table-condensed">
+          <thead>
+            <th><input id="all" type="checkbox" onClick="checkAll()"></th>  
+            <th>Atributo</th>
+            <th>Concepto</th>
+          </thead>
+          <tbody>
+            <% @concepts.each do | c| %>
+            <tr>
+              <td><%= check_box_tag "concepts[#{c.id}]" %></td>
+              <td><%= c.attribute.name %> </td>
+              <td><%= c.description%> </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+     </div>
+      <div class="form-actions">
+        <button id="btn-submit" type="submit" class="btn btn-primary">Guardar</button>
+        <button class="btn">Cancelar</button>
+      </div> 
+    </form> 
+  </div>
+  <div class="span4 well">
+    <h2><%=  @subsystem.name %> </h2>
+    <ul>
+      <li><h4>Pertenece al sistema de <%= System.find(@subsystem.system_id).name    %> </h4></li>
+      <li><h4><%= @diagram.name %> </h4></li>
+      <li><h4>Tipo de sistema: <%= @subsystem.system.system_type.name %> </h4></li>
+      <li><h4>Programador: <%= @programmer.complete_name %> </h4></li>
+    </ul>
+    <br/>
+    Recuerde que:
+      <ul>
+        <li><label id="la">Los conceptos mostrados están relacionados con los atributos que seleccionó previamente.</label></li>
+      </ul>
+  </div>
+</div>
+
+<script>
+  var concepts = [];
+  <% @concepts.each  do | concept| %>
+      x= <%= concept.id.to_s %>;
+
+      if (concepts.indexOf(x.toString())){
+        concepts.push(x.toString());
+      }
+ 
+  <% end %>
+  function checkAll(){
+    check = document.getElementById("all")
+    for(var i = 0; i < concepts.length; i++){
+      if(check.checked == true){
+        document.getElementById("concepts_" + concepts[i]).checked = true
+        
+      }else{
+        document.getElementById("concepts_" + concepts[i]).checked = false
+      } 
+    } 
+  }
+  
+  function validateCheckBoxRow(){
+    var r = 0;
+    for(var i = 0; i < concepts.length; i++){
+      if(document.getElementById("concepts_" + concepts[i]).checked == true){
+        r = 1;
+        break;
+      }
+      
+    }   
+    if(r == 0){
+      return false;
+    }else{
+      return true;
+    }
+  }
+  
+  function validateData(){
+    if(validateCheckBoxRow() == true){
+      $('span.help-inline').remove();
+      return true
+      
+    }else{
+      div = $("#la").parents("div.span5");
+      span = "<span class='help-inline'><font color='red'>" + "Debe seleccionar al menos un concepto</font></span>"
+      div.after(span);
+      return false
+    }
+    
+    
+  }
+</script>
+
+
+
+

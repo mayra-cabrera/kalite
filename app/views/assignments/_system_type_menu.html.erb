@@ -1,0 +1,14 @@
+ <ul class="nav nav-tabs">    
+   <% @system_types.each do |system_type| %>
+      <% if @active != "" %>
+        <%if @active == system_type.id %>
+           <li class="active">
+        <% else %>
+           <li>
+        <% end %>
+           <%=  link_to system_type.name, {:controller => :assignments, :action => :index, :id => system_type.id}%> </li>
+      <% else %>
+           <li><%=  link_to system_type.name, {:controller => :assignements, :action => :index, :id => system_type.id}%> </li>
+      <% end %>
+   <% end %>
+  </ul>

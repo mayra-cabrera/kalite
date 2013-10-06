@@ -1,0 +1,30 @@
+<% content_for :title, "Catálogos" %> 
+
+<div class="page-header">
+  <h3><%= @assignment.system_type.name %></h3> <br/>
+  <h4><%= @assignment.diagram.name %> </h4>
+</div>
+
+<div class="row">
+  <div class="span4">
+    <table class="table table-striped table-bordered table-condensed">
+      <thead>
+      <th>Atributo</th>
+      <th>Peso</th>
+      </thead>
+      <tbody>
+        <% @all_assignments.each do |assignment| %>
+        <tr>
+          <td><%= assignment.attribute.name %> </td>
+          <td><%= assignment.weight %> </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  
+</div>
+
+<div class="form-actions">
+  <%= link_to 'Editar', edit_assignment_path(@assignment), { :class => "btn btn-primary" } %> 
+</div>
