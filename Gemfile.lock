@@ -45,6 +45,8 @@ GEM
     arel (3.0.3)
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
+    bootstrap-sass (3.0.3.0)
+      sass (~> 3.2)
     bourbon (3.1.8)
       sass (>= 3.2.0)
       thor
@@ -126,6 +128,7 @@ GEM
       activesupport (= 3.2.6)
       bundler (~> 1.0)
       railties (= 3.2.6)
+    rails_layout (0.5.6)
     railties (3.2.6)
       actionpack (= 3.2.6)
       activesupport (= 3.2.6)
@@ -168,6 +171,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
+  bootstrap-sass
   coffee-rails
   declarative_authorization
   devise
@@ -177,6 +181,7 @@ DEPENDENCIES
   paperclip (~> 3.1)
   pg
   rails (= 3.2.6)
+  rails_layout
   sass-rails
   turn (= 0.8.2)
   uglifier
