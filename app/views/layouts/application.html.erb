@@ -6,15 +6,44 @@
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Kalite" %>">
     <%= stylesheet_link_tag "application", media: "all" %>
     <%= javascript_include_tag "application" %>
+    <%= stylesheet_link_tag "bootstrap"%>
     <%= csrf_meta_tags %>
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+      }
+    </style>
   </head>
   <body>
     <header>
-      <%= render 'layouts/navigation' %>
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container-fluid">
+            <a class="brand" href="/">Kalité</a>
+            <div class="nav-collapse">
+              <ul class="nav">
+                <% if yield(:title) == 'Inicio' %>
+                  <li class="active">
+                <% else %>
+                    <li>
+                <% end %>
+                  <a href="/">Inicio</a></li>
+                    
+              </ul>
+              <p class="navbar-text pull-right"><%= link_to "Administrador", new_administrator_session_path %>&nbsp;|&nbsp;<%= link_to "Programador", new_programmer_session_path %></p>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
     </header>
-    <main role="main">
-       <%= render 'layouts/messages' %>
-       <%= yield %>
-    </main>
+
+    <div class="container">
+      <%= render 'layouts/messages' %>
+      <%= yield %>
+      <footer>
+        <hr/>
+        <p><%= Time.now.year %> Company, Inc. <%= link_to "Privacy", "#" %> <%= link_to "Terms", "#" %></p>
+      </footer>
+    </div>
   </body>
 </html>
