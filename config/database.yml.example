@@ -1,0 +1,18 @@
+
+common: &common
+  adapter: postgresql
+  username: kalite
+  password: kalite_password
+  host: localhost 
+
+development:
+  <<: *common
+  database: kalite_development
+
+test: &test
+  <<: *common
+  database: kalite_test
+
+production:
+  <<: *common
+  database: kalite_production

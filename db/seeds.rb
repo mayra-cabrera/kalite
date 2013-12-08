@@ -2,15 +2,12 @@
 
 puts 'Loading administrators...'
 
-Administrator.create!(:first_name =>  'María de Lourdes', :last_name =>  'Hernández Rodríguez', :email =>  'mhernand@lania.mx', :password =>  'password')
-Administrator.create!(:first_name =>  'Mayra', :last_name =>  'Cabrera Díaz', :email =>  'mcabrera@lania.mx', :password =>  'password')
+Administrator.create!(:first_name =>  'Mayra', :last_name =>  'Cabrera Díaz', :email =>  'mayra@email.com', :password =>  'password')
 
 puts 'Loading programmers...'
 
-Programmer.create!(:first_name =>  'Yesenia', :last_name =>  'Hernández', :email =>  'yhernandez@lania.mx', :password =>  'password')
-Programmer.create!(:first_name =>  'Saul', :last_name =>  'Dominguez', :email =>  'sdominguez@lania.mx', :password =>  'password')
-Programmer.create!(:first_name =>  'Yahaira', :last_name =>  'Rodriguez', :email =>  'yrodriguez@lania.mx', :password =>  'password')
-Programmer.create!(:first_name =>  'Karla', :last_name =>  'Martinez', :email =>  'kmartine@lania.mx', :password =>  'password')
+Programmer.create!(:first_name =>  'Programmer 1', :last_name =>  'Last name', :email =>  'programmer1@email.com', :password =>  'password')
+Programmer.create!(:first_name =>  'Programmer 2', :last_name =>  'Last name', :email =>  'programmer2@email.com', :password =>  'password')
 
 puts 'Loading atributtes...'
 Attribute.create!(:name => 'Anotado') #1

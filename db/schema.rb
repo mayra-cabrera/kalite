@@ -30,8 +30,8 @@ ActiveRecord::Schema.define(:version => 20120529154406) do
     t.string   "authentication_token"
     t.string   "first_name",             :limit => 50,                 :null => false
     t.string   "last_name",              :limit => 50,                 :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
   end
 
   add_index "administrators", ["email"], :name => "index_administrators_on_email", :unique => true
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(:version => 20120529154406) do
     t.integer  "diagram_id",     :null => false
     t.float    "weight"
     t.integer  "system_type_id", :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "attachments", :force => true do |t|
@@ -54,14 +54,14 @@ ActiveRecord::Schema.define(:version => 20120529154406) do
     t.integer  "attach_file_size"
     t.datetime "attach_updated_at"
     t.integer  "formal_technical_review_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
   end
 
   create_table "attributes", :force => true do |t|
     t.string   "name",       :limit => 20, :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
   create_table "concepts", :force => true do |t|
@@ -71,26 +71,26 @@ ActiveRecord::Schema.define(:version => 20120529154406) do
     t.integer  "attribute_id", :null => false
     t.integer  "section_id",   :null => false
     t.integer  "diagram_id",   :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "diagrams", :force => true do |t|
     t.string   "name",       :limit => 50, :null => false
     t.string   "folio",                    :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
   create_table "formal_technical_reviews", :force => true do |t|
-    t.integer  "administrator_id",                                :null => false
-    t.integer  "programmer_id",                                   :null => false
-    t.integer  "subsystem_id",                                    :null => false
-    t.integer  "diagram_id",                                      :null => false
-    t.decimal  "result",           :precision => 10, :scale => 0
+    t.integer  "administrator_id", :null => false
+    t.integer  "programmer_id",    :null => false
+    t.integer  "subsystem_id",     :null => false
+    t.integer  "diagram_id",       :null => false
+    t.decimal  "result"
     t.integer  "score_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "programmers", :force => true do |t|
@@ -110,8 +110,8 @@ ActiveRecord::Schema.define(:version => 20120529154406) do
     t.string   "authentication_token"
     t.string   "first_name",             :limit => 50,                 :null => false
     t.string   "last_name",              :limit => 50,                 :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
   end
 
   add_index "programmers", ["email"], :name => "index_programmers_on_email", :unique => true
@@ -123,8 +123,8 @@ ActiveRecord::Schema.define(:version => 20120529154406) do
     t.integer  "attribute_id", :null => false
     t.integer  "rtf_id",       :null => false
     t.float    "weight",       :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "rtf_concepts", :force => true do |t|
@@ -133,8 +133,8 @@ ActiveRecord::Schema.define(:version => 20120529154406) do
     t.float    "weight"
     t.integer  "grade"
     t.float    "total"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "rtf_domains", :force => true do |t|
@@ -143,8 +143,8 @@ ActiveRecord::Schema.define(:version => 20120529154406) do
     t.integer  "attach_file_size"
     t.datetime "attach_updated_at"
     t.integer  "formal_technical_review_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
   end
 
   create_table "rtf_use_cases", :force => true do |t|
@@ -153,45 +153,45 @@ ActiveRecord::Schema.define(:version => 20120529154406) do
     t.integer  "attach_file_size"
     t.datetime "attach_updated_at"
     t.integer  "formal_technical_review_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
   end
 
   create_table "scores", :force => true do |t|
     t.string   "description", :null => false
     t.float    "start",       :null => false
     t.float    "end",         :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "sections", :force => true do |t|
     t.string   "name",       :null => false
     t.integer  "diagram_id", :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "subsystems", :force => true do |t|
     t.string   "name",        :null => false
     t.text     "description", :null => false
     t.integer  "system_id",   :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "system_types", :force => true do |t|
     t.string   "name",       :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "systems", :force => true do |t|
     t.string   "name",           :null => false
     t.text     "description",    :null => false
     t.integer  "system_type_id", :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
 end
